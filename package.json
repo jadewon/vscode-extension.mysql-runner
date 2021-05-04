@@ -17,7 +17,10 @@
     "views": {
       "explorer": [{ "id": "tables", "name": "Tables" }]
     },
-    "commands": [{ "command": "mysql-runner.runSelectQuery", "title": "Run Query" }],
+    "commands": [
+      { "command": "mysql-runner.runSelectQuery", "title": "Run Query" },
+      { "command": "mysql-runner.changeConnection", "title": "Change DB connection" }
+    ],
     "keybindings": [
       {
         "command": "mysql-runner.runSelectQuery",

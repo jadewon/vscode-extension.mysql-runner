@@ -2,8 +2,13 @@ import * as vscode from 'vscode';
 import SimpleConnector from './SimpleConnector';
 
 export default class TableListProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
-  constructor(private connector: SimpleConnector) {}
+  private _onDidChangeTreeData: vscode.EventEmitter<undefined | null | void>;
+  public onDidChangeTreeData: vscode.Event<undefined | null | void>;
 
+  constructor(private connector: SimpleConnector) {
+    this._onDidChangeTreeData = new vscode.EventEmitter();
+    this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+  }
   getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
     return element;
   }
@@ -21,5 +26,9 @@ export default class TableListProvider implements vscode.TreeDataProvider<vscode
       };
       return item;
     }));
+  }
+
+  refresh(): void {
+    this._onDidChangeTreeData.fire(undefined);
   }
 }
