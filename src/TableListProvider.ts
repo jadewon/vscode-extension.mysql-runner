@@ -9,7 +9,7 @@ export default class TableListProvider implements vscode.TreeDataProvider<vscode
   }
 
   getChildren(element?: vscode.TreeItem): Thenable<vscode.TreeItem[]> {
-    return this.connector.query('show tables').then((value: unknown) => {
+    return this.connector.query('show tables', false).then((value: unknown) => {
       const list: string[] | null = String(value).match(/([\w\d_]+)/g);
       return (list && list.length > 1) ? list.slice(1) : ([] as string[]);
     }).then((list: string[]) => list.map(row => {
